@@ -1,13 +1,13 @@
 from flask_script import Manager
 
-from twittor import create_app
+import os, sys
+
+from __init__ import create_app
+
+#import create_app
 
 app = create_app()
 manager = Manager(app)
-
-@manager.command
-def hello():
-    print "hello"
 
 if __name__ == "__main__":
     manager.run()
