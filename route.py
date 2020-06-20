@@ -14,3 +14,7 @@ def index():
 
     ]
     return render_template('index.html', name=name, posts=posts)
+
+
+def login():
+    return render_template('login.html')
