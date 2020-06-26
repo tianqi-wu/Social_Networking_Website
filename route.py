@@ -1,4 +1,5 @@
 from flask import render_template
+from forms import LoginForm
 
 def index():
     name = {'username':'root'}
@@ -17,4 +18,6 @@ def index():
 
 
 def login():
+
+    form = LoginForm(csrf_enabled=False)
     return render_template('login.html')
