@@ -22,6 +22,12 @@ def login():
     form = LoginForm(csrf_enabled=False)
 
     if form.validate_on_submit():
+        msg = "username={}, password={}, remember_me={}".format(
+            form.username.data,
+            form.password.data,
+            form.remember_me.data
+        )
+        print(msg)
         return redirect('/')
 
     return render_template('login.html',title="Sign In",form=form)
