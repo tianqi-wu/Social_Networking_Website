@@ -11,8 +11,8 @@
     {% endif %}
 </head>
 <body>
-    <div>Andy's Social Network Website: <a href="/">Home</a>
-    <a href="/login">Login</a>
+    <div>Andy's Social Network Website: <a href=" {{ url_for('index') }} ">Home</a>
+    <a href=" {{ url_for('login') }} ">Login</a>
     </div>
     <hr>
     {% block content %}{% endblock %}
