@@ -20,4 +20,4 @@ def index():
 def login():
 
     form = LoginForm(csrf_enabled=False)
-    return render_template('login.html'，title="Sign In",form=form)
+    return render_template('login.html',title="Sign In",form=form)
