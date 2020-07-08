@@ -1,5 +1,6 @@
 from flask import render_template, redirect
 from forms import LoginForm
+from models import User
 
 def index():
     name = {'username':'root'}
