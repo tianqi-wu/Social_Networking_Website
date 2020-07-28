@@ -20,19 +20,19 @@ class User(db.Model):
             self.id, self.username, self.email, self.password_hash
         )
 
-"""
+
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
         return check_password_hash(self.password_hash,password)
 
+'''
 @login_manager.user_loader
 def user_loader(id):
     return User.query.get(int(id))
+'''
 
-
-"""
 class Tweet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
@@ -40,7 +40,7 @@ class Tweet(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return "tweet={}, create at {}".format(
-            self.body, self.create_time
+        return "id={}, body={}, tweet={}, create at {}, user_id={}".format(
+            self.id, self.body, self.create_time, self.user_id
         )
 

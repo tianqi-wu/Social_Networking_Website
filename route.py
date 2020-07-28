@@ -22,10 +22,9 @@ def index():
 def login():
     form = LoginForm(csrf_enabled=False)
     if form.validate_on_submit:
-        msg = "username={},password={},remember_me={}".format(
-            form.username.data,
-            form.password.data,
-            form.remember_me.data
-        )
-        print(msg)
+        u = User.query.filter_by(username=form.username.data).first()
+        if u is None or not u.check_password(form.password.data):
+            print('Invalid username or password!')
+            return redirect(url_for('login'))
+        return redirect(url_for('index'))
     return render_template('login.html',title="Sign In",form=form)
