@@ -21,7 +21,7 @@ def index():
 
 def login():
     form = LoginForm(csrf_enabled=False)
-    if form.validate_on_submit:
+    if form.validate_on_submit():
         u = User.query.filter_by(username=form.username.data).first()
         if u is None or not u.check_password(form.password.data):
             print('Invalid username or password!')
