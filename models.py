@@ -1,14 +1,13 @@
-from __init__ import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
-#from __init__ import db, login_manager
+from __init__ import db, login_manager
 
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True, index=True)
     email = db.Column(db.String(64), unique=True, index=True)
@@ -27,11 +26,11 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash,password)
 
-'''
-@login_manager.user_loader
+
+@login_manager.user_loader # Decorator
 def user_loader(id):
-    return User.query.get(int(id))
-'''
+    return User.query.get(int(id)) # id is initially stored as a string
+
 
 class Tweet(db.Model):
     id = db.Column(db.Integer, primary_key=True)

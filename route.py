@@ -1,4 +1,5 @@
 from flask import render_template, redirect, url_for
+from flask_login import login_user
 from forms import LoginForm
 from models import User, Tweet
 
@@ -20,11 +21,12 @@ def index():
 
 
 def login():
-    form = LoginForm(csrf_enabled=False)
+    form = LoginForm()
     if form.validate_on_submit():
         u = User.query.filter_by(username=form.username.data).first()
         if u is None or not u.check_password(form.password.data):
             print('Invalid username or password!')
             return redirect(url_for('login'))
+        login_user(u, remember = form.remember_me.data)
         return redirect(url_for('index'))
     return render_template('login.html',title="Sign In",form=form)
