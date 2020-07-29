@@ -1,5 +1,5 @@
 from flask import render_template, redirect, url_for
-from flask_login import login_user
+from flask_login import login_user, current_user
 from forms import LoginForm
 from models import User, Tweet
 
@@ -21,6 +21,8 @@ def index():
 
 
 def login():
+    if current_user.is_authenticated():
+        return redirect(url_for(index))
     form = LoginForm()
     if form.validate_on_submit():
         u = User.query.filter_by(username=form.username.data).first()
