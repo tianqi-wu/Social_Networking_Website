@@ -8,6 +8,7 @@ from config import Config
 db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
+login_manager.login.view = 'login'
 
 #from route import index, login
 
