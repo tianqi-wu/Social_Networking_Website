@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_login import LoginManager
 
 from config import Config
 
@@ -10,7 +11,7 @@ login_manager = LoginManager()
 
 #from route import index, login
 
-from route import index, login
+from route import index, login, logout
 
 def create_app():
     app = Flask(__name__)
@@ -21,5 +22,6 @@ def create_app():
     app.add_url_rule('/index', 'index', index)
     app.add_url_rule('/', 'index', index)
     app.add_url_rule('/login','login', login, methods=['GET','POST'])
+    app.add_url_rule('/logout', logout)
     return app
 
