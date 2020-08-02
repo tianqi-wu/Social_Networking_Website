@@ -12,7 +12,7 @@ login_manager.login.view = 'login'
 
 #from route import index, login
 
-from route import index, login, logout
+from route import index, login, logout, user
 
 def create_app():
     app = Flask(__name__)
@@ -25,5 +25,6 @@ def create_app():
     app.add_url_rule('/login','login', login, methods=['GET','POST'])
     app.add_url_rule('/logout', 'logout', logout)
     app.add_url_rule('/register', 'register', register, methods=['GET','POST'])
+    app.add_url_rule('/<username>', 'profile', user)
     return app
 
