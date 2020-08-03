@@ -58,3 +58,8 @@ def user(username):
         ]
     return render_template('user.html', title='Profile', posts=posts, user=u)
 
+def page_not_found():
+    return render_template('404.html')
+
+    
+

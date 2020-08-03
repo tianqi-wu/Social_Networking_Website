@@ -12,7 +12,7 @@ login_manager.login.view = 'login'
 
 #from route import index, login
 
-from route import index, login, logout, user
+from route import index, login, logout, user, page_not_found
 
 def create_app():
     app = Flask(__name__)
@@ -26,5 +26,6 @@ def create_app():
     app.add_url_rule('/logout', 'logout', logout)
     app.add_url_rule('/register', 'register', register, methods=['GET','POST'])
     app.add_url_rule('/<username>', 'profile', user)
+    app.register_error_handler(404, page_not_found)
     return app
 
