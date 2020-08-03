@@ -3,9 +3,21 @@ from flask_login import login_user, current_user, logout_user, login_required
 from forms import LoginForm, RegisterForm
 from models import User, Tweet
 
+from __init__ import db
+
 @login_required
 def index():
     name = {'username':current_user.username}
+    posts = [
+        {
+            'author': {'username': 'root'},
+           'body': "hi I'm root!"
+        },
+        {
+            'author': {'username': 'test'},
+            'body': "hi I'm test!"
+        },
+    ]
     return render_template('index.html', name=name, posts=posts)
 
 
@@ -44,18 +56,18 @@ def register():
 @login_required
 def user(username):
     u = User.query.filter_by(username=username).first()
+    posts = [
+    {
+        'author': {'username': u.username},
+        'body': "hi I'm {}!".format(u.username)
+    },
+    {
+        'author': {'username': u.username},
+        'body': "hi I'm {}!".format(u.username)
+    }
+    ]
     if u is None:
         abort(404)
-        posts = [
-        {
-            'author': {'username': u.username},
-            'body': "hi I'm {}!".format(u.username)
-        },
-        {
-            'author': {'username': u.username},
-            'body': "hi I'm {}!".format(u.username)
-        }
-        ]
     return render_template('user.html', title='Profile', posts=posts, user=u)
 
 def page_not_found():

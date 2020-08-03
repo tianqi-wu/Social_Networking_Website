@@ -8,11 +8,11 @@ from config import Config
 db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
-login_manager.login.view = 'login'
+login_manager.login_view = 'login'
 
 #from route import index, login
 
-from route import index, login, logout, user, page_not_found
+from route import index, login, logout, register, user, page_not_found
 
 def create_app():
     app = Flask(__name__)
