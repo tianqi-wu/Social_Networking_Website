@@ -4,7 +4,20 @@
 <table>
     <tr>
         <td><img src="{{ user.avatar(128) }}" alt=""></td>
-        <td>{{ user.username }}</td>
+        <td>
+            <p>{{ user.username }}</p>
+            {% if user.about_me %}
+            <p>{{ user.about_me }}</p>
+            {% endif %}
+
+            {% if user.create_time %}
+            <p>{{ %user.create_time% }}</p>
+            {% endif %}
+            {% if user == current_user %}
+                <p><a href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
+            {% endif %}
+
+        </td>
     </tr>
 </table>
 {% for post in posts %}
@@ -13,5 +26,6 @@
         <td><img src="{{ user.avatar(60) }}" alt=""></td>
         <td><p>{{ post.author.username }} says: <b> {{ post.body }} </b></p></td>
     </tr>
+    </table>
     {%endfor%}
 {% endblock %}

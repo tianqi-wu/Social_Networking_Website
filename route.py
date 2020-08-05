@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, request, abort
 from flask_login import login_user, current_user, logout_user, login_required
-from forms import LoginForm, RegisterForm
+from forms import LoginForm, RegisterForm, EditProfileForm
 from models import User, Tweet
 
 from __init__ import db
@@ -71,7 +71,18 @@ def user(username):
     return render_template('user.html', title='Profile', posts=posts, user=u)
 
 def page_not_found():
-    return render_template('404.html')
+    return render_template('404.html'), 404
 
+
+@login_required
+def edit_profile():
+    form = EditProfileForm()
+    if request.method == 'GET':
+        form.about_me.data = current_user.about_me
+    if form.validate_on_submit():
+        current_user.about_me = form.about_me.data
+        db.session.commit()
+        return redirect(url_for('profile'),username = current_user.username) # has to give profile, and username
+    return render_template('edit_profile.html',form=form)
     
 
