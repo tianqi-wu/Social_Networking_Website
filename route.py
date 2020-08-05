@@ -7,7 +7,7 @@ from __init__ import db
 
 @login_required
 def index():
-    name = {'username':current_user.username}
+    name = {'username': current_user.username}
     posts = [
         {
             'author': {'username': 'root'},
